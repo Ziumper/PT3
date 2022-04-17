@@ -91,7 +91,11 @@ namespace PT3.ViewModel
 
         private void OnFileSystemChanged(FileSystemEventArgs e)
         {
+            if (e.ChangeType == WatcherChangeTypes.Changed) return;
+
             Open(path);
         }
+
+        
     }
 }
