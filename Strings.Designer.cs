@@ -61,6 +61,15 @@ namespace PT3 {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Select directory to open.
+        /// </summary>
+        public static string Directory_Description {
+            get {
+                return ResourceManager.GetString("Directory_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Exit.
         /// </summary>
         public static string Exit {

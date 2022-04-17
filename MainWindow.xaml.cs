@@ -34,17 +34,6 @@ namespace PT3
             fileExplorer.PropertyChanged += OnFileExplorerPropertyChanged;
         }
 
-        private void OnOpenItemMenuClick(object sender, RoutedEventArgs args)
-        {
-            var dlg = new FolderBrowserDialog() { Description = "Select directory to open" };
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                var path = dlg.SelectedPath;
-                fileExplorer.OpenRoot(path);
-                DataContext = fileExplorer;
-            }
-        }
-
         private void OnExitItemMenuClick(object sender, RoutedEventArgs args)
         {
             Close();

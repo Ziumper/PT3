@@ -46,7 +46,8 @@ namespace PT3.ViewModel
 
         private void OpenRootFolderExecute(object parameter)
         {
-            var dlg = new System.Windows.Forms.FolderBrowserDialog() { Description = "Select directory to open" };
+         
+            var dlg = new System.Windows.Forms.FolderBrowserDialog() { Description = Strings.Directory_Description };
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 var path = dlg.SelectedPath;
