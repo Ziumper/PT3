@@ -95,5 +95,14 @@ namespace PT3 {
                 return ResourceManager.GetString("Open_Directory", resourceCulture);
             }
         }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Sorting.
+        /// </summary>
+        public static string Sorting {
+            get {
+                return ResourceManager.GetString("Sorting", resourceCulture);
+            }
+        }
     }
 }

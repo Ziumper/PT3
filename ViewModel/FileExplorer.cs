@@ -10,6 +10,7 @@ namespace PT3.ViewModel
     public class FileExplorer : ViewModelBase
     {
         public RelayCommand OpenRootFolderCommand { get; private set; }
+        public RelayCommand SortRootFolderCommand { get; private set; }
         public string Lang
         {
             get { return CultureInfo.CurrentUICulture.TwoLetterISOLanguageName; }
@@ -37,6 +38,7 @@ namespace PT3.ViewModel
             NotifyPropertyChanged(nameof(Lang));
             root = new DirectoryInfoViewModel();
             OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
+            SortRootFolderCommand = new RelayCommand(SortRootFolderExecute, CanExecuteSort);
         }
 
         public void OpenRoot(string path)
@@ -53,6 +55,21 @@ namespace PT3.ViewModel
                 var path = dlg.SelectedPath;
                 OpenRoot(path);
             }
+        }
+
+        private void SortRootFolderExecute(object parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanExecuteSort(object parameter)
+        {
+            if(SortRootFolderCommand.CanExecute(parameter))
+            {
+                return root.IsInitlized;
+            };
+
+            return false;
         }
     }
 }

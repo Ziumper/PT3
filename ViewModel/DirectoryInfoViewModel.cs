@@ -15,6 +15,17 @@ namespace PT3.ViewModel
         private string path;
         private string imageSource = "Resources/FolderClose.png";
 
+        public bool IsInitlized { 
+            get 
+            { 
+                if(path == null) return false;
+
+                if(path.Length == 0) return false; 
+
+                return true;
+            }  
+        }
+
         public string ImageSource { get => imageSource; private set { } }
 
         public ObservableCollection<FileSystemInfoViewModel> Items { get; private set; } = new ObservableCollection<FileSystemInfoViewModel>();
