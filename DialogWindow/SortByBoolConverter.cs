@@ -13,8 +13,8 @@ namespace PT3.DialogWindow
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int intValue = Int32.Parse((string)parameter);
-            SortBy enumValue = (SortBy)intValue;
+
+            SortBy enumValue = ConvertEnum(parameter);
        
             if (value.Equals(enumValue))
                 return true;
@@ -24,10 +24,16 @@ namespace PT3.DialogWindow
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if ((bool)value == false) return null;
-            return (SortBy)parameter;
+            return ConvertEnum(parameter);
         }
 
-        //TODO Add converting values
-        //private SortBy co
+        
+        private SortBy ConvertEnum(object parameter)
+        {
+            int intValue = Int32.Parse((string)parameter);
+            SortBy enumValue = (SortBy)intValue;
+
+            return enumValue;
+        }
     }
 }

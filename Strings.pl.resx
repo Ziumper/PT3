@@ -144,17 +144,11 @@
   <data name="Sort_By" xml:space="preserve">
     <value>Sortuj po:</value>
   </data>
-  <data name="Sort_Cancel" xml:space="preserve">
-    <value>Anuluj</value>
-  </data>
   <data name="Sort_Extensions" xml:space="preserve">
     <value>Rozszerzenie</value>
   </data>
   <data name="Sort_Modification_Date" xml:space="preserve">
     <value>Data Ostatniej Modyfikacji</value>
-  </data>
-  <data name="Sort_Ok" xml:space="preserve">
-    <value>Zatwierdź</value>
   </data>
   <data name="Sort_Order" xml:space="preserve">
     <value>Sposób sortowania:</value>

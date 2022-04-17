@@ -133,15 +133,6 @@ namespace PT3 {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Cancel.
-        /// </summary>
-        public static string Sort_Cancel {
-            get {
-                return ResourceManager.GetString("Sort_Cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Extensions.
         /// </summary>
         public static string Sort_Extensions {
@@ -156,15 +147,6 @@ namespace PT3 {
         public static string Sort_Modification_Date {
             get {
                 return ResourceManager.GetString("Sort_Modification_Date", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ok.
-        /// </summary>
-        public static string Sort_Ok {
-            get {
-                return ResourceManager.GetString("Sort_Ok", resourceCulture);
             }
         }
         
