@@ -5,33 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PT3.DialogWindow"
         mc:Ignorable="d"
-        Title="SortingDialog" Height="450" Width="800">
+        Title="SortingDialog"
+        SizeToContent="WidthAndHeight">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <RadioButton Name="FileType" Grid.Row="0" Height="15" Grid.Column="0" Width="40"  HorizontalAlignment="Left">
-            <Label Padding="0">File</Label>
-        </RadioButton>
-        <RadioButton Name="DirectoryType" Grid.Row="1" Height="15" Width="75" HorizontalAlignment="Left">
-            <Label Padding="0">Directory</Label>
-        </RadioButton>
-       
-        <Button Grid.Row="6" Width="50" Margin="0 0 20 0" HorizontalAlignment="Right" VerticalAlignment="Center"  Grid.Column="0"  >
-            Ok
-        </Button>
-        <Button Grid.Row="6" Width="60"  HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center" Margin="20,0,0,0"   >
-            Cancel
-        </Button>
+        <StackPanel Margin="10" Height="auto">
+            <Label Padding="0">Sort by:</Label>
+            <RadioButton GroupName="sortBy"  Name="AlphabeticallyType"  Width="auto"  HorizontalAlignment="Left">
+                <Label Padding="0">Alphabetically</Label>
+            </RadioButton>
+            <RadioButton  GroupName="sortBy" Name="ExtensionsType"  Width="auto" HorizontalAlignment="Left">
+                <Label Padding="0">Extensions</Label>
+            </RadioButton>
+            <RadioButton  GroupName="sortBy" Name="SizeType"  Width="auto" HorizontalAlignment="Left">
+                <Label Padding="0">Size</Label>
+            </RadioButton>
+            <RadioButton  GroupName="sortBy" Name="LastDateModificationType"  Width="auto" HorizontalAlignment="Left">
+                <Label Padding="0">Modification Date</Label>
+            </RadioButton>
+
+            <Label Padding="0">Sorting order:</Label>
+            <RadioButton  GroupName="sortOrder" Name="Ascending"  Width="auto" HorizontalAlignment="Left">
+                <Label Padding="0">Ascending</Label>
+            </RadioButton>
+            <RadioButton  GroupName="sortOrder" Name="Descending"  Width="auto" HorizontalAlignment="Left">
+                <Label Padding="0">Descending</Label>
+            </RadioButton>
+
+            <DockPanel>
+                <Button Margin=" 0 10 0 0" MinWidth="60" HorizontalAlignment="Left">
+                    Ok
+                </Button>
+                <Button Margin="20 10 0 0" MinWidth="60" HorizontalAlignment="Left">
+                    Cancel
+                </Button>
+            </DockPanel>
+           
+        </StackPanel>
     </Grid>
 </Window>
