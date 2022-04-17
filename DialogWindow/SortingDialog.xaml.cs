@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PT3.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,16 @@ namespace PT3.DialogWindow
     /// </summary>
     public partial class SortingDialog : Window
     {
-        public SortingDialog()
+        private SortingViewModel sorting;
+        public SortingViewModel Sorting { get { return sorting; } }
+        
+        public SortingDialog(SortingViewModel sorting)
         {
             InitializeComponent();
+            this.sorting = sorting;
+            DataContext = this.sorting;
         }
+
+
     }
 }

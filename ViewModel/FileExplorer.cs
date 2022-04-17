@@ -8,9 +8,13 @@ namespace PT3.ViewModel
 {
     public class FileExplorer : ViewModelBase
     {
+        private DirectoryInfoViewModel root;
+        private SortingViewModel sorting;
+
         public ICommand OpenRootFolderCommand { get; private set; }
         public ICommand SortRootFolderCommand { get; private set; }
         public ICommand ExitCommand { get; private set; }
+
         public string Lang
         {
             get { return CultureInfo.CurrentUICulture.TwoLetterISOLanguageName; }
@@ -25,18 +29,30 @@ namespace PT3.ViewModel
             }
         }
 
-
-        private DirectoryInfoViewModel root;
         public DirectoryInfoViewModel Root { get => root;
             set {
                 if (value != null) root = value;
+                NotifyPropertyChanged();
             }
+        }
+
+        public SortingViewModel Sorting { 
+            get { return sorting; } 
+            set { if (value != null) sorting = value; NotifyPropertyChanged(); } 
         }
 
         public FileExplorer()
         {
             NotifyPropertyChanged(nameof(Lang));
+
             root = new DirectoryInfoViewModel();
+            NotifyPropertyChanged(nameof(Root));
+
+            sorting = new SortingViewModel();
+            sorting.SortBy = Enum.SortBy.Alphabetical;
+            sorting.Direction = Enum.Direction.Ascending;
+            NotifyPropertyChanged(nameof(Sorting));
+
             OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
             SortRootFolderCommand = new RelayCommand(SortRootFolderExecute, CanExecuteSort);
             ExitCommand = new RelayCommand(ExitExecute);
@@ -73,7 +89,7 @@ namespace PT3.ViewModel
 
         private void SortRootFolderExecute(object parameter)
         {
-            Window window = new SortingDialog();
+            Window window = new SortingDialog(Sorting);
             window.ShowDialog();
         }
 

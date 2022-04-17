@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PT3"
-        xmlns:viewmodels="clr-namespace:PT3.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodels:FileExplorer}"
+        xmlns:viewmodel="clr-namespace:PT3.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:FileExplorer}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
@@ -20,14 +20,14 @@
             </Style.Triggers>
         </Style>
 
-        <DataTemplate DataType="{x:Type viewmodels:FileInfoViewModel}">
+        <DataTemplate DataType="{x:Type viewmodel:FileInfoViewModel}">
             <StackPanel Orientation="Horizontal">
                 <Image Width="16" Source="{Binding ImageSource}" />
                 <TextBlock Margin="10,0,0,0" Text="{Binding Caption}"/>
             </StackPanel>
             
         </DataTemplate>
-        <HierarchicalDataTemplate DataType="{x:Type viewmodels:DirectoryInfoViewModel}"
+        <HierarchicalDataTemplate DataType="{x:Type viewmodel:DirectoryInfoViewModel}"
              ItemsSource="{Binding Items}">
             <StackPanel Orientation="Horizontal">
                 <Image Width="16" Source="{Binding ImageSource}" />
