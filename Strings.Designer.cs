@@ -61,6 +61,24 @@ namespace PT3 {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ascending.
+        /// </summary>
+        public static string Ascending_Order {
+            get {
+                return ResourceManager.GetString("Ascending_Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Descending.
+        /// </summary>
+        public static string Descending_Order {
+            get {
+                return ResourceManager.GetString("Descending_Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Select directory to open.
         /// </summary>
         public static string Directory_Description {
@@ -93,6 +111,78 @@ namespace PT3 {
         public static string Open_Directory {
             get {
                 return ResourceManager.GetString("Open_Directory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Alphabetically.
+        /// </summary>
+        public static string Sort_Alphabetically {
+            get {
+                return ResourceManager.GetString("Sort_Alphabetically", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Sort by:.
+        /// </summary>
+        public static string Sort_By {
+            get {
+                return ResourceManager.GetString("Sort_By", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Cancel.
+        /// </summary>
+        public static string Sort_Cancel {
+            get {
+                return ResourceManager.GetString("Sort_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Extensions.
+        /// </summary>
+        public static string Sort_Extensions {
+            get {
+                return ResourceManager.GetString("Sort_Extensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Modification Date.
+        /// </summary>
+        public static string Sort_Modification_Date {
+            get {
+                return ResourceManager.GetString("Sort_Modification_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ok.
+        /// </summary>
+        public static string Sort_Ok {
+            get {
+                return ResourceManager.GetString("Sort_Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Sort order:.
+        /// </summary>
+        public static string Sort_Order {
+            get {
+                return ResourceManager.GetString("Sort_Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Size.
+        /// </summary>
+        public static string Sort_Size {
+            get {
+                return ResourceManager.GetString("Sort_Size", resourceCulture);
             }
         }
         

@@ -9,35 +9,31 @@
         SizeToContent="WidthAndHeight">
     <Grid>
         <StackPanel Margin="10" Height="auto">
-            <Label Padding="0">Sort by:</Label>
+            <Label Content="{Binding Source={StaticResource Strings}, Path=Sort_By}" Padding="0"/>
             <RadioButton GroupName="sortBy"  Name="AlphabeticallyType"  Width="auto"  HorizontalAlignment="Left">
-                <Label Padding="0">Alphabetically</Label>
+                <Label Content="{Binding Source={StaticResource Strings}, Path=Sort_Alphabetically}" Padding="0"/>
             </RadioButton>
             <RadioButton  GroupName="sortBy" Name="ExtensionsType"  Width="auto" HorizontalAlignment="Left">
-                <Label Padding="0">Extensions</Label>
+                <Label Content="{Binding Source={StaticResource Strings}, Path=Sort_Extensions}" Padding="0"/>
             </RadioButton>
             <RadioButton  GroupName="sortBy" Name="SizeType"  Width="auto" HorizontalAlignment="Left">
-                <Label Padding="0">Size</Label>
+                <Label Content="{Binding Source={StaticResource Strings}, Path=Sort_Size}" Padding="0"/>
             </RadioButton>
             <RadioButton  GroupName="sortBy" Name="LastDateModificationType"  Width="auto" HorizontalAlignment="Left">
-                <Label Padding="0">Modification Date</Label>
+                <Label Content="{Binding Source={StaticResource Strings}, Path=Sort_Modification_Date}" Padding="0"/>
             </RadioButton>
 
-            <Label Padding="0">Sorting order:</Label>
+            <Label Content="{Binding Source={StaticResource Strings}, Path=Sort_Order}" Padding="0"/>
             <RadioButton  GroupName="sortOrder" Name="Ascending"  Width="auto" HorizontalAlignment="Left">
-                <Label Padding="0">Ascending</Label>
+                <Label  Content="{Binding Source={StaticResource Strings}, Path=Ascending_Order}" Padding="0"/>
             </RadioButton>
             <RadioButton  GroupName="sortOrder" Name="Descending"  Width="auto" HorizontalAlignment="Left">
-                <Label Padding="0">Descending</Label>
+                <Label Content="{Binding Source={StaticResource Strings}, Path=Descending_Order}" Padding="0"/>
             </RadioButton>
 
             <DockPanel>
-                <Button Margin=" 0 10 0 0" MinWidth="60" HorizontalAlignment="Left">
-                    Ok
-                </Button>
-                <Button Margin="20 10 0 0" MinWidth="60" HorizontalAlignment="Left">
-                    Cancel
-                </Button>
+                <Button Margin=" 0 10 0 0" MinWidth="60" HorizontalAlignment="Left" Content="{Binding  Source={StaticResource Strings}, Path=Sort_Ok}"/>
+                <Button Margin="20 10 0 0" MinWidth="60" HorizontalAlignment="Left" Content="{Binding Source={StaticResource Strings}, Path=Sort_Cancel}" />
             </DockPanel>
            
         </StackPanel>
