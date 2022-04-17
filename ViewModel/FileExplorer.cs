@@ -64,12 +64,7 @@ namespace PT3.ViewModel
 
         private bool CanExecuteSort(object parameter)
         {
-            if(SortRootFolderCommand.CanExecute(parameter))
-            {
-                return root.IsInitlized;
-            };
-
-            return false;
+            return root.IsInitlized;
         }
     }
 }
