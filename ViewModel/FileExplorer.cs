@@ -45,17 +45,17 @@ namespace PT3.ViewModel
             ExitCommand = new RelayCommand(ExitExecute);
         }
 
-        private void ExitExecute(object obj)
+        private void ExitExecute(object parameter)
         {
-            if(obj == null) return;
+            if(parameter == null) return;
 
-            if (obj is not Window)
+            if (parameter is not Window)
             {
                 throw new ArgumentException("Not valid parameter passed into exit command");
             };
 
-            Window mainWinodw = (Window)obj;
-            mainWinodw.Close();
+            Window window = (Window)parameter;
+            window.Close();
         }
 
         private void OpenRootFolderExecute(object parameter)
