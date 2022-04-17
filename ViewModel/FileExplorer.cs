@@ -4,13 +4,16 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace PT3.ViewModel
 {
     public class FileExplorer : ViewModelBase
     {
-        public RelayCommand OpenRootFolderCommand { get; private set; }
-        public RelayCommand SortRootFolderCommand { get; private set; }
+        public ICommand OpenRootFolderCommand { get; private set; }
+        public ICommand SortRootFolderCommand { get; private set; }
+        public ICommand ExitCommand { get; private set; }
         public string Lang
         {
             get { return CultureInfo.CurrentUICulture.TwoLetterISOLanguageName; }
@@ -39,11 +42,20 @@ namespace PT3.ViewModel
             root = new DirectoryInfoViewModel();
             OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
             SortRootFolderCommand = new RelayCommand(SortRootFolderExecute, CanExecuteSort);
+            ExitCommand = new RelayCommand(ExitExecute);
         }
 
-        public void OpenRoot(string path)
+        private void ExitExecute(object obj)
         {
-            Root.Open(path);
+            if(obj == null) return;
+
+            if (obj is not Window)
+            {
+                throw new ArgumentException("Not valid parameter passed into exit command");
+            };
+
+            Window mainWinodw = (Window)obj;
+            mainWinodw.Close();
         }
 
         private void OpenRootFolderExecute(object parameter)
@@ -55,6 +67,11 @@ namespace PT3.ViewModel
                 var path = dlg.SelectedPath;
                 OpenRoot(path);
             }
+        }
+
+        private void OpenRoot(string path)
+        {
+            Root.Open(path);
         }
 
         private void SortRootFolderExecute(object parameter)

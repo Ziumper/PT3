@@ -49,12 +49,15 @@
         <Menu Grid.Row="0" Grid.ColumnSpan="2" DockPanel.Dock="Top">
             <MenuItem Header="{Binding Source={StaticResource Strings}, Path=File}">
                 <MenuItem Header="{Binding Source={StaticResource Strings}, Path=Open_Directory}"
-                         Command="{Binding OpenRootFolderCommand}"/>
-                <MenuItem Header="{Binding Source={StaticResource Strings}, Path=Exit}" Click="OnExitItemMenuClick"></MenuItem>
+                         Command="{Binding OpenRootFolderCommand}"
+                />
+                <MenuItem Header="{Binding Source={StaticResource Strings}, Path=Exit}"
+                          Command="{Binding ExitCommand}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                />
             </MenuItem>
             <MenuItem Header="{Binding Source={StaticResource Strings}, Path=Sorting}"
-                      Command="{Binding SortRootFolderCommand}"
-                      />
+                      Command="{Binding SortRootFolderCommand}" />
         </Menu>
         <ToolBarPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0" Grid.Column="1" Background="{x:Static SystemColors.ControlLightBrush}" >
             <ToggleButton Margin="5 0 5 0" x:Name="PolishLangugageButton" Style="{StaticResource LangButtonStyle}" IsChecked="{Binding Lang, Converter={StaticResource LangBoolConverter}, ConverterParameter=pl}">
