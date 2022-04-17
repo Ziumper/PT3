@@ -48,8 +48,9 @@
 
         <Menu Grid.Row="0" Grid.ColumnSpan="2" DockPanel.Dock="Top">
             <MenuItem Header="{Binding Source={StaticResource Strings}, Path=File}">
-                <MenuItem Header="Open" Click="OnOpenItemMenuClick"></MenuItem>
-                <MenuItem Header="Exit" Click="OnExitItemMenuClick"></MenuItem>
+                <MenuItem Header="{Binding Source={StaticResource Strings}, Path=Open_Directory}"
+                         Command="{Binding OpenRootFolderCommand}"/>
+                <MenuItem Header="{Binding Source={StaticResource Strings}, Path=Exit}" Click="OnExitItemMenuClick"></MenuItem>
             </MenuItem>
         </Menu>
         <ToolBarPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0" Grid.Column="1" Background="{x:Static SystemColors.ControlLightBrush}" >
