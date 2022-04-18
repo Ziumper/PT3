@@ -91,6 +91,8 @@ namespace PT3.ViewModel
                 }
             }
         }
+
+
         
         protected void SetProperties(FileSystemInfo model)
         {

@@ -95,9 +95,9 @@ namespace PT3.ViewModel
 
         private void Sort(SortBy sortBy,Direction direction)
         {
-            foreach (var item in this.Items)
+            foreach (var item in Items)
             {
-                
+               
             }
         }
 
@@ -117,6 +117,7 @@ namespace PT3.ViewModel
 
         private void ReadFiles()
         {
+            if (path == null) return;
             foreach (var fileName in Directory.GetFiles(path))
             {
                 var fileInfo = new FileInfo(fileName);
@@ -128,6 +129,7 @@ namespace PT3.ViewModel
 
         private void InitlizeWatcher()
         {
+            if(path == null) return;    
             watcher = new FileSystemWatcher(path);
             watcher.Created += OnFileSystemChanged;
             watcher.Renamed += OnFileSystemChanged;
@@ -136,7 +138,6 @@ namespace PT3.ViewModel
 
             watcher.Error += OnWatcherError;
             watcher.EnableRaisingEvents = true;
-
         }
 
         private void OnWatcherError(object sender, ErrorEventArgs e)
