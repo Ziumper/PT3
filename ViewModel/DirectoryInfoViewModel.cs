@@ -15,7 +15,6 @@ namespace PT3.ViewModel
         private FileSystemWatcher? watcher;
         private string? path;
         private string imageSource = "Resources/FolderClose.png";
-        private long count;
 
         public new FileSystemInfo? Model
         {
@@ -25,6 +24,10 @@ namespace PT3.ViewModel
                 if (fileSystemInfo != value && value != null)
                 {
                     SetProperties(value);
+
+                    DirectoryInfo directoryInfo = new DirectoryInfo(value.FullName);
+                    Size = directoryInfo.GetDirectories().Length + directoryInfo.GetFiles().Length;
+                    
                     NotifyPropertyChanged();
                 }
             }
@@ -45,18 +48,6 @@ namespace PT3.ViewModel
 
         public ObservableCollection<FileSystemInfoViewModel> Items { get; private set; } = new ObservableCollection<FileSystemInfoViewModel>();
         public Exception? Exception { get; private set; }
-        public new long Count
-        {
-            get { return count; }
-            set {
-
-                if(count != value)
-                {
-                    count = value; 
-                    NotifyPropertyChanged();
-                }
-            }
-        }
 
         public void OnFileSystemChanged(object sender, FileSystemEventArgs e)
         {
@@ -84,21 +75,88 @@ namespace PT3.ViewModel
             return result;
         }
 
-        public void Sort(SortingViewModel sortingViewModel)
+        public override void Sort(SortingViewModel sortingViewModel)
         {
-            bool isEmpty = IsInitlized;
+            bool isEmpty = !IsInitlized;
             
             if (isEmpty) return;
 
-            Sort(sortingViewModel.SortBy, sortingViewModel.Direction);
-        }
-
-        private void Sort(SortBy sortBy,Direction direction)
-        {
             foreach (var item in Items)
             {
-               
+                item.Sort(sortingViewModel);              
             }
+
+            var orderableItems = Items.OrderBy(OrderByType);
+
+            if (sortingViewModel.Direction == Direction.Ascending)
+            {
+                if (sortingViewModel.SortBy == SortBy.Alphabetical)
+                {
+                   orderableItems = orderableItems.ThenBy(item => item.Caption);
+                }
+
+                if (sortingViewModel.SortBy == SortBy.ModificationDate)
+                {
+                    orderableItems = orderableItems.ThenBy(item => item.LastWriteTime);
+                }
+
+                if(sortingViewModel.SortBy == SortBy.Extension)
+                {
+                    orderableItems = orderableItems.ThenBy(item => item.Extension);
+                }
+
+                if(sortingViewModel.SortBy == SortBy.Size)
+                {
+                    orderableItems = orderableItems.ThenBy(item => item.Size);
+                }
+            }
+
+            if(sortingViewModel.Direction == Direction.Descending)
+            {
+                if (sortingViewModel.SortBy == SortBy.Alphabetical)
+                {
+                    orderableItems = orderableItems.ThenByDescending(item => item.Caption);
+                }
+
+                if (sortingViewModel.SortBy == SortBy.ModificationDate)
+                {
+                    orderableItems = orderableItems.ThenByDescending(item => item.LastWriteTime);
+                }
+
+                if (sortingViewModel.SortBy == SortBy.Extension)
+                {
+                    orderableItems = orderableItems.ThenByDescending(item => item.Extension);
+                }
+
+                if(sortingViewModel.SortBy == SortBy.Size)
+                {
+                    orderableItems = orderableItems.ThenByDescending(item => item.Size);
+                }
+            }
+
+             var itemList = orderableItems.ToList();
+
+            foreach(var item in itemList)
+            {
+                var newIndex = itemList.IndexOf(item);
+                var oldIndex = Items.IndexOf(item);
+                if(newIndex > -1)
+                {
+
+                    Items.Move(oldIndex, newIndex);
+                }
+            }
+
+        }
+
+        private int OrderByType(ViewModelBase item)
+        {
+            if(item is DirectoryInfoViewModel)
+            {
+                return 0;
+            }
+
+            return 1;
         }
 
         private void ReadCatalogs()

@@ -14,7 +14,7 @@ namespace PT3.ViewModel
         private string? caption;
         private string? imageSource;
         private string? extension;
-        private long count;
+        private long size;
 
         public FileSystemInfo? Model
         {
@@ -25,7 +25,7 @@ namespace PT3.ViewModel
                     SetProperties(value);
                     
                     FileInfo fileInfo = new FileInfo(value.FullName);
-                    Count = fileInfo.Length;
+                    Size = fileInfo.Length;
 
                     NotifyPropertyChanged();
                 }
@@ -40,6 +40,11 @@ namespace PT3.ViewModel
                     NotifyPropertyChanged();
                 }
             }
+        }
+
+        public virtual void Sort(SortingViewModel sorting)
+        {
+
         }
 
         public string? ImageSource { get { return imageSource; } 
@@ -79,14 +84,14 @@ namespace PT3.ViewModel
             }
         }
 
-        public long Count
+        public long Size
         {
-            get { return count; }
+            get { return size; }
             set
             {
-                if(count != value)
+                if(size != value)
                 {
-                    count = value;
+                    size = value;
                     NotifyPropertyChanged();
                 }
             }
