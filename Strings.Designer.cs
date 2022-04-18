@@ -115,6 +115,15 @@ namespace PT3 {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Open file.
+        /// </summary>
+        public static string Open_File {
+            get {
+                return ResourceManager.GetString("Open_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Alphabetically.
         /// </summary>
         public static string Sort_Alphabetically {
