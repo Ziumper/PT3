@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PT3.Enum;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -11,9 +12,23 @@ namespace PT3.ViewModel
 {
     public class DirectoryInfoViewModel : FileSystemInfoViewModel
     {
-        private FileSystemWatcher watcher;
-        private string path;
+        private FileSystemWatcher? watcher;
+        private string? path;
         private string imageSource = "Resources/FolderClose.png";
+        private long count;
+
+        public new FileSystemInfo? Model
+        {
+            get { return fileSystemInfo; }
+            set
+            {
+                if (fileSystemInfo != value && value != null)
+                {
+                    SetProperties(value);
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
         public bool IsInitlized { 
             get 
@@ -26,10 +41,22 @@ namespace PT3.ViewModel
             }  
         }
 
-        public string ImageSource { get => imageSource; private set { } }
+        public new string ImageSource { get => imageSource; private set { } }
 
         public ObservableCollection<FileSystemInfoViewModel> Items { get; private set; } = new ObservableCollection<FileSystemInfoViewModel>();
-        public Exception Exception { get; private set; }
+        public Exception? Exception { get; private set; }
+        public new long Count
+        {
+            get { return count; }
+            set {
+
+                if(count != value)
+                {
+                    count = value; 
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
         public void OnFileSystemChanged(object sender, FileSystemEventArgs e)
         {
@@ -55,6 +82,23 @@ namespace PT3.ViewModel
             if (result) InitlizeWatcher();
 
             return result;
+        }
+
+        public void Sort(SortingViewModel sortingViewModel)
+        {
+            bool isEmpty = IsInitlized;
+            
+            if (isEmpty) return;
+
+            Sort(sortingViewModel.SortBy, sortingViewModel.Direction);
+        }
+
+        private void Sort(SortBy sortBy,Direction direction)
+        {
+            foreach (var item in this.Items)
+            {
+                
+            }
         }
 
         private void ReadCatalogs()
@@ -103,8 +147,7 @@ namespace PT3.ViewModel
         private void OnFileSystemChanged(FileSystemEventArgs e)
         {
             if (e.ChangeType == WatcherChangeTypes.Changed) return;
-
-            Open(path);
+            if(path != null) Open(path);
         }
 
         

@@ -53,9 +53,16 @@ namespace PT3.ViewModel
             sorting.Direction = Enum.Direction.Ascending;
             NotifyPropertyChanged(nameof(Sorting));
 
+            Sorting.PropertyChanged += OnSortingPropertyChanged;
+
             OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
             SortRootFolderCommand = new RelayCommand(SortRootFolderExecute, CanExecuteSort);
             ExitCommand = new RelayCommand(ExitExecute);
+        }
+
+        private void OnSortingPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Root.Sort(Sorting);
         }
 
         private void ExitExecute(object parameter)
@@ -80,6 +87,8 @@ namespace PT3.ViewModel
                 var path = dlg.SelectedPath;
                 OpenRoot(path);
             }
+
+            Root.Sort(Sorting);
         }
 
         private void OpenRoot(string path)

@@ -9,26 +9,40 @@ namespace PT3.ViewModel
 {
     public class FileSystemInfoViewModel : ViewModelBase
     {
-        private FileSystemInfo fileSystemInfo;
+        protected FileSystemInfo? fileSystemInfo;
         private DateTime lastWriteTime;
-        private string caption;
-        private string imageSource;
+        private string? caption;
+        private string? imageSource;
+        private string? extension;
+        private long count;
 
-        public FileSystemInfo Model
+        public FileSystemInfo? Model
         {
             get { return fileSystemInfo; }
             set { 
-                if (fileSystemInfo != value)
+                if (fileSystemInfo != value && value != null)
                 {
-                    fileSystemInfo = value;
-                    LastWriteTime = value.LastWriteTime;
-                    Caption = value.Name;
+                    SetProperties(value);
+                    
+                    FileInfo fileInfo = new FileInfo(value.FullName);
+                    Count = fileInfo.Length;
+
                     NotifyPropertyChanged();
                 }
             }
         }
 
-        public string ImageSource { get { return imageSource; } 
+        public string? Extension {  get { return extension; } set
+            {
+                if(extension != value)
+                {
+                    extension = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public string? ImageSource { get { return imageSource; } 
             set 
             {
                 if(imageSource != value)
@@ -52,7 +66,7 @@ namespace PT3.ViewModel
             }
         }
 
-        public string Caption
+        public string? Caption
         {
             get { return caption; }
             set 
@@ -64,7 +78,27 @@ namespace PT3.ViewModel
                 }
             }
         }
+
+        public long Count
+        {
+            get { return count; }
+            set
+            {
+                if(count != value)
+                {
+                    count = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
         
+        protected void SetProperties(FileSystemInfo model)
+        {
+            fileSystemInfo = model;
+            LastWriteTime = model.LastWriteTime;
+            Caption = model.Name;
+            Extension = model.Extension;
+        }
         
     }
 }
