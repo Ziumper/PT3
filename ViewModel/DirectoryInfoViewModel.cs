@@ -16,6 +16,10 @@ namespace PT3.ViewModel
         private string? path;
         private string imageSource = "Resources/FolderClose.png";
 
+        public DirectoryInfoViewModel(ViewModelBase owner) : base(owner)
+        {
+        }
+
         public new FileSystemInfo? Model
         {
             get { return fileSystemInfo; }
@@ -164,7 +168,7 @@ namespace PT3.ViewModel
             foreach (var dirName in Directory.GetDirectories(path))
             {
                 var dirInfo = new DirectoryInfo(dirName);
-                DirectoryInfoViewModel itemViewModel = new DirectoryInfoViewModel();
+                DirectoryInfoViewModel itemViewModel = new DirectoryInfoViewModel(this);
                 itemViewModel.Model = dirInfo;
                 Items.Add(itemViewModel);
 
@@ -179,7 +183,7 @@ namespace PT3.ViewModel
             foreach (var fileName in Directory.GetFiles(path))
             {
                 var fileInfo = new FileInfo(fileName);
-                FileInfoViewModel itemViewModel = new FileInfoViewModel();
+                FileInfoViewModel itemViewModel = new FileInfoViewModel(this);
                 itemViewModel.Model = fileInfo;
                 Items.Add(itemViewModel);
             }

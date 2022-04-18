@@ -16,6 +16,11 @@ namespace PT3.ViewModel
         private string? extension;
         private long size;
 
+        public FileSystemInfoViewModel(ViewModelBase owner)
+        {
+            Owner = owner;
+        }
+
         public FileSystemInfo? Model
         {
             get { return fileSystemInfo; }
@@ -32,6 +37,8 @@ namespace PT3.ViewModel
             }
         }
 
+        public ViewModelBase Owner { get; private set; }
+
         public string? Extension {  get { return extension; } set
             {
                 if(extension != value)
@@ -40,11 +47,6 @@ namespace PT3.ViewModel
                     NotifyPropertyChanged();
                 }
             }
-        }
-
-        public virtual void Sort(SortingViewModel sorting)
-        {
-
         }
 
         public string? ImageSource { get { return imageSource; } 
@@ -98,7 +100,13 @@ namespace PT3.ViewModel
         }
 
 
-        
+      
+
+        public virtual void Sort(SortingViewModel sorting)
+        {
+
+        }
+
         protected void SetProperties(FileSystemInfo model)
         {
             fileSystemInfo = model;

@@ -11,8 +11,16 @@ namespace PT3.ViewModel
     {
         private Dictionary<string, string> imageSource = new Dictionary<string, string>();
 
-        public ICommand OpenFileCommand { get; private set; }
+        public FileInfoViewModel(ViewModelBase owner) : base(owner)
+        {
+            imageSource.Add(".txt", "Resources/icon-txt.png");
+            imageSource.Add(".pdf", "Resources/icon-pdf.png");
 
+            OpenFileCommand = new RelayCommand(OnOpenFileCommand, CanExecuteOnOpenFileCommand);
+        }
+
+        public ICommand OpenFileCommand { get; private set; }
+      
         public new string ImageSource { 
             get 
             {
@@ -26,13 +34,10 @@ namespace PT3.ViewModel
 
             } private set { }  }
 
-        public FileInfoViewModel()
-        {
-            imageSource.Add(".txt", "Resources/icon-txt.png");
-            imageSource.Add(".pdf", "Resources/icon-pdf.png");
+        //public FileInfoViewModel()
+        //{
 
-            OpenFileCommand = new RelayCommand(OnOpenFileCommand,CanExecuteOnOpenFileCommand);
-        }
+        //}
 
         private bool CanExecuteOnOpenFileCommand(object obj)
         {

@@ -45,7 +45,7 @@ namespace PT3.ViewModel
         {
             NotifyPropertyChanged(nameof(Lang));
 
-            root = new DirectoryInfoViewModel();
+            root = new DirectoryInfoViewModel(this);
             NotifyPropertyChanged(nameof(Root));
 
             sorting = new SortingViewModel();
