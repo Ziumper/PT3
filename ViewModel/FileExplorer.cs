@@ -1,6 +1,7 @@
 ﻿using PT3.DialogWindow;
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,9 +12,43 @@ namespace PT3.ViewModel
         private DirectoryInfoViewModel root;
         private SortingViewModel sorting;
 
+        public static readonly string[] TextFilesExtensions = new string[] { ".txt", ".ini", ".log" };
+
         public ICommand OpenRootFolderCommand { get; private set; }
         public ICommand SortRootFolderCommand { get; private set; }
         public ICommand ExitCommand { get; private set; }
+        public ICommand OpenFileCommand { get; private set; }
+
+        public DirectoryInfoViewModel Root
+        {
+            get => root;
+            set
+            {
+                if (value != null) root = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public SortingViewModel Sorting
+        {
+            get { return sorting; }
+            set { if (value != null) sorting = value; NotifyPropertyChanged(); }
+        }
+
+        public string Lang
+        {
+            get { return CultureInfo.CurrentUICulture.TwoLetterISOLanguageName; }
+            set
+            {
+                if (value != null)
+                    if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName != value)
+                    {
+                        CultureInfo.CurrentUICulture = new CultureInfo(value);
+                        NotifyPropertyChanged();
+                    }
+            }
+        }
+
 
         public FileExplorer()
         {
@@ -32,35 +67,27 @@ namespace PT3.ViewModel
             OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
             SortRootFolderCommand = new RelayCommand(SortRootFolderExecute, CanExecuteSort);
             ExitCommand = new RelayCommand(ExitExecute);
+
+            OpenFileCommand = new RelayCommand(OnOpenFileCommand, OpenFileCanExecute);
         }
 
-        public string Lang
+        private void OnOpenFileCommand(object obj)
         {
-            get { return CultureInfo.CurrentUICulture.TwoLetterISOLanguageName; }
-            set
+            throw new NotImplementedException();
+        }
+
+        private bool OpenFileCanExecute(object parameter)
+        {
+            if (parameter is FileInfoViewModel viewModel)
             {
-                if (value != null)
-                    if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName != value)
-                    {
-                        CultureInfo.CurrentUICulture = new CultureInfo(value);
-                        NotifyPropertyChanged();
-                    }
+                var extension = viewModel.Extension?.ToLower();
+                return TextFilesExtensions.Contains(extension);
             }
+            return false;
         }
 
-        public DirectoryInfoViewModel Root { get => root;
-            set {
-                if (value != null) root = value;
-                NotifyPropertyChanged();
-            }
-        }
 
-        public SortingViewModel Sorting { 
-            get { return sorting; } 
-            set { if (value != null) sorting = value; NotifyPropertyChanged(); } 
-        }
 
-    
 
         private void OnSortingPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {

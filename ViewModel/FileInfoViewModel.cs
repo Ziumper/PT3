@@ -10,17 +10,7 @@ namespace PT3.ViewModel
     public class FileInfoViewModel: FileSystemInfoViewModel
     {
         private Dictionary<string, string> imageSource = new Dictionary<string, string>();
-
-        public FileInfoViewModel(ViewModelBase owner) : base(owner)
-        {
-            imageSource.Add(".txt", "Resources/icon-txt.png");
-            imageSource.Add(".pdf", "Resources/icon-pdf.png");
-
-            OpenFileCommand = new RelayCommand(OnOpenFileCommand, CanExecuteOnOpenFileCommand);
-        }
-
         public ICommand OpenFileCommand { get; private set; }
-      
         public new string ImageSource { 
             get 
             {
@@ -32,21 +22,25 @@ namespace PT3.ViewModel
 
                 return source;
 
-            } private set { }  }
+            } 
+        }
 
-        //public FileInfoViewModel()
-        //{
+        public FileInfoViewModel(ViewModelBase owner) : base(owner)
+        {
+            imageSource.Add(".txt", "Resources/icon-txt.png");
+            imageSource.Add(".pdf", "Resources/icon-pdf.png");
 
-        //}
+            OpenFileCommand = new RelayCommand(OnOpenFileCommand, CanExecuteOnOpenFileCommand);
+        }
 
         private bool CanExecuteOnOpenFileCommand(object obj)
         {
-            return true;
+            return OwnerExplorer.OpenFileCommand.CanExecute(obj);
         }
 
         private void OnOpenFileCommand(object obj)
         {
-           throw new NotImplementedException();
+            OwnerExplorer.OpenFileCommand.Execute(obj);
         }
     }
 }
