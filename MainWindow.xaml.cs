@@ -32,6 +32,17 @@ namespace PT3
             fileExplorer = new FileExplorer();
             DataContext = fileExplorer;
             fileExplorer.PropertyChanged += OnFileExplorerPropertyChanged;
+            fileExplorer.OnOpenFileRequest += OnOpenFileRequest;
+        }
+
+        private void OnOpenFileRequest(object? sender, FileInfoViewModel e)
+        {
+            var content = fileExplorer.GetFileContent(e);
+            if (content is string text)
+            {
+                FileTextBox.Text = text;
+            }
+
         }
 
         private void OnExitItemMenuClick(object sender, RoutedEventArgs args)
