@@ -15,6 +15,25 @@ namespace PT3.ViewModel
         public ICommand SortRootFolderCommand { get; private set; }
         public ICommand ExitCommand { get; private set; }
 
+        public FileExplorer()
+        {
+            NotifyPropertyChanged(nameof(Lang));
+
+            root = new DirectoryInfoViewModel(this);
+            NotifyPropertyChanged(nameof(Root));
+
+            sorting = new SortingViewModel();
+            sorting.SortBy = Enum.SortBy.Alphabetical;
+            sorting.Direction = Enum.Direction.Ascending;
+            NotifyPropertyChanged(nameof(Sorting));
+
+            Sorting.PropertyChanged += OnSortingPropertyChanged;
+
+            OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
+            SortRootFolderCommand = new RelayCommand(SortRootFolderExecute, CanExecuteSort);
+            ExitCommand = new RelayCommand(ExitExecute);
+        }
+
         public string Lang
         {
             get { return CultureInfo.CurrentUICulture.TwoLetterISOLanguageName; }
@@ -41,24 +60,7 @@ namespace PT3.ViewModel
             set { if (value != null) sorting = value; NotifyPropertyChanged(); } 
         }
 
-        public FileExplorer()
-        {
-            NotifyPropertyChanged(nameof(Lang));
-
-            root = new DirectoryInfoViewModel(this);
-            NotifyPropertyChanged(nameof(Root));
-
-            sorting = new SortingViewModel();
-            sorting.SortBy = Enum.SortBy.Alphabetical;
-            sorting.Direction = Enum.Direction.Ascending;
-            NotifyPropertyChanged(nameof(Sorting));
-
-            Sorting.PropertyChanged += OnSortingPropertyChanged;
-
-            OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
-            SortRootFolderCommand = new RelayCommand(SortRootFolderExecute, CanExecuteSort);
-            ExitCommand = new RelayCommand(ExitExecute);
-        }
+    
 
         private void OnSortingPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {

@@ -21,6 +21,21 @@ namespace PT3.ViewModel
             Owner = owner;
         }
 
+        public FileExplorer OwnerExplorer
+        {
+            get
+            {
+                var owner = Owner;
+                while (owner is DirectoryInfoViewModel ownerDirectory)
+                {
+                    if (ownerDirectory.Owner is FileExplorer explorer)
+                        return explorer;
+                    owner = ownerDirectory.Owner;
+                }
+                return null;
+            }
+        }
+
         public FileSystemInfo? Model
         {
             get { return fileSystemInfo; }
